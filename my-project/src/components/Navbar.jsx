@@ -41,6 +41,7 @@ const Navbar = () => {
      <div className='hidden md:block'>
         <ul className='flex items-center gap-4 relative z-30'>
             {NavbarMenu.map((item) => (
+           // eslint-disable-next-line react/jsx-key
            <li>
             <a 
             href={item.link}
