@@ -5,7 +5,7 @@ import Fanta3 from "../assets/fanta3.png";
 import {motion} from "framer-motion";
 import Navbar from './Navbar';
 
-const headphoneData = [
+const HeroData = [
     {
       id: 1,
       image: Fanta1,
@@ -39,7 +39,7 @@ const headphoneData = [
   ];
 
 const Hero = () => {
-    const [activeData, setActiveData] = React.useState(headphoneData[0]);
+    const [activeData, setActiveData] = React.useState(HeroData[0]);
 
     const handleActiveData = (data) => {
       setActiveData(data);
@@ -69,8 +69,29 @@ const Hero = () => {
             <div className='w-20 h-[1px] bg-white'></div>
           </div>
 
-         </div>  
-        </div>
+          <div className='grid grid-cols-3 gap-10'>
+           {HeroData.map((data) => {
+             return (
+               <div className='cursor-pointer space-y-3 hover:scale-100
+               transition-all duration-200'>
+                <div className='flex justify-center'>
+                 <img src={data.image} alt="" className={`w-[80px] img-shadow
+                    ${activeData.image === data.image
+                   ? "opacity-100 scale-110"
+                   : "opacity-50"
+                }`}/>
+               </div>
+                <div className='text-center !mt-6 space-y-1'>
+                  <p className='text-base line-through opacity-50'>{data.price}</p>
+                  <p className='text-xl font-bold'>{data.price}</p>
+                 </div>
+                 </div>
+                  );
+                })}   
+                </div>
+              </div>  
+             </div>
+
        </div>
       </motion.div>
     </>
