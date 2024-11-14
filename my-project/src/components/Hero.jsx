@@ -3,6 +3,7 @@ import Fanta1 from "../assets/fanta1.png";
 import Fanta2 from "../assets/fanta2.png";
 import Fanta3 from "../assets/fanta3.png";
 import { FaWhatsapp } from "react-icons/fa";
+import { UpdateFollower } from "react-mouse-follower";
 import { AnimatePresence, easeInOut, motion } from "framer-motion";
 import Navbar from './Navbar';
 
@@ -86,7 +87,18 @@ const Hero = () => {
        <div className='container grid grid-cols-1 md:grid-cols-2 min-h-[605px]'>
         <div className='flex flex-col justify-center py-14 md:py-0 xl:max-w-[500px] order-2 md:order-1'>
          <div className='space-y-5 text-center md:text-left'>
-          <motion.h1 
+         <AnimatePresence mode="wait">
+                <UpdateFollower
+                  mouseOptions={{
+                    backgroundColor: "white",
+                    zIndex: 9999,
+                    followSpeed: 0.5,
+                    rotate: -720,
+                    mixBlendMode: "difference",
+                    scale: 10,
+                  }}
+                >
+        <motion.h1 
           key={activeData.id}
           variants={SlideRight(0.2)}
           initial="hidden"
@@ -95,43 +107,112 @@ const Hero = () => {
           className='text-3xl lg:text-6xl xl:text-7xl font-bold font-handwriting text-shadow'>
           {activeData.title}
           </motion.h1>
-          <p className=''>{activeData.subtitle}</p>
-          <button className='px-4 py-2 text-black bg-white inline-block font-normal rounded-sm'>
+        </UpdateFollower>
+      </AnimatePresence>
+      <AnimatePresence mode="wait">
+          <motion.p 
+           key={activeData.id}
+           variants={SlideRight(0.4)}
+           initial="hidden"
+           animate="show"
+           exit="exit"
+           className='text-sm leading-loose text-white/80'>
+          {activeData.subtitle}
+          </motion.p>
+         </AnimatePresence>
+         
+         <AnimatePresence mode="wait">
+                <UpdateFollower
+                  mouseOptions={{
+                    backgroundColor: activeData.bgColor,
+                    zIndex: 9999,
+                    followSpeed: 0.5,
+                    rotate: -720,
+                    scale: 6,
+                    backgroundElement: (
+                      <div>
+                        <img src={activeData.image} />
+                      </div>
+                    ),
+                  }}
+                >
+     
+        <motion.button 
+          key={activeData.id}
+          variants={SlideRight(0.6)}
+          initial="hidden"
+          animate="show"
+          exit="exit"
+          style={{ color: activeData.bgColor }}
+          className='px-4 py-2 text-black bg-white 
+          inline-block font-normal rounded-sm'>
             Order Now
-          </button>
+          </motion.button>
+         </UpdateFollower>
+        </AnimatePresence>
 
-          <div className='flex items-center justify-center md:justify-start gap-4 !md:mt-24 !mb-10'>
-            <div className='w-20 h-[1px] bg-white'></div>
-            <p>TOP RECOMMENDATION</p>
-            <div className='w-20 h-[1px] bg-white'></div>
-          </div>
+          {/* Hero List Separator */}
 
-          <div className='grid grid-cols-3 gap-10'>
-           {HeroData.map((data) => {
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeInOut" }}
+          className='flex items-center justify-center 
+          md:justify-start gap-4 !md:mt-24 !mb-10'
+          >
+            <div className='w-20 h-[1px] bg-white'></div>
+            <p>Top Recommendation</p>
+            <div className='w-20 h-[1px] bg-white'></div>
+          </motion.div>
+
+          <motion.div 
+           initial={{ opacity: 0 }}
+           animate={{ opacity: 1 }}
+           transition={{ duration: 0.8, delay: 0.2, ease: "easeInOut" }}
+          className='grid grid-cols-3 gap-10'>
+           {HeroData.map((item) => {
              return (
-               <div className='cursor-pointer space-y-3 hover:scale-100
-               transition-all duration-200'>
+              // eslint-disable-next-line react/jsx-key
+              <UpdateFollower
+                 mouseOptions={{
+                  backgroundColor: item.bgColor,
+                  zIndex: 9999,
+                  followSpeed: 0.5,
+                  scale: 5,
+                  text: "View Details",
+                  textFontSize: "3px",
+                }}
+              >
+               <div 
+                key={item.id}
+                onClick={() => handleActiveData(item)}
+                className='cursor-pointer space-y-3 hover:scale-100
+                transition-all duration-200'
+              >
                 <div className='flex justify-center'>
-                 <img src={data.image} alt="Fanta cans" className={`w-[80px] img-shadow
-                    ${activeData.image === data.image
+                 <img src={item.image} alt="Fanta cans" className={`w-[80px] img-shadow
+                    ${activeData.image === item.image
                    ? "opacity-100 scale-110"
                    : "opacity-50"
                 }`}/>
                </div>
                 <div className='text-center !mt-6 space-y-1'>
-                  <p className='text-base line-through opacity-50'>{data.price}</p>
-                  <p className='text-xl font-bold'>{data.price}</p>
+                  <p className='text-base line-through opacity-50'>{item.price}</p>
+                  <p className='text-xl font-bold'>{item.price}</p>
                  </div>
                 </div>
+                </UpdateFollower>
                   );
                 })}   
-                </div>
+                </motion.div>
               </div>  
              </div>
           
+           {/* Hero Image */}
+           
        <div className='flex flex-col justify-end items-center
          relative order-1 md:order-2'>
-        <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait">
            <motion.img 
               key={activeData.id}
               initial={{ opacity: 0, x: 100 }}
@@ -171,7 +252,7 @@ const Hero = () => {
           </div>
 
         <div className="text-3xl text-white fixed bottom-10 right-10 hover:rotate-[360deg] duration-500 z-[99999] mix-blend-difference">
-            <a href="">
+            <a href="Whatsapp icon">
               <FaWhatsapp />
             </a>
         </div>
