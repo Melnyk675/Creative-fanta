@@ -3,6 +3,7 @@ import Products from "./components/Products/Products";
 import Banner from "./components/Banner/Banner";
 import BannerText from "./components/Banner/BannerText";
 import Blogs from "./components/Blogs/Blogs";
+import FAQ from "./components/FAQ/FAQ";
 
 const App = () => {
   return <main className="overflow-x-hidden">
@@ -12,6 +13,7 @@ const App = () => {
       <Banner />
       <BannerText />
       <Blogs />
+      <FAQ />
     </main>
 };
 
