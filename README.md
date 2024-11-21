@@ -2,9 +2,12 @@
 
 A frontend webpage consisting information about popular Fanta brand and its products.
 
-- Frameworks: Vite, React and Tailwind CSS
+# Technology stack:
+ - Vite 
+ - React
+ - Tailwind CSS
 
-info-fanta.netlify.app
+
 
 
 
