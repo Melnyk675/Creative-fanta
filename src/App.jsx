@@ -7,8 +7,7 @@ import FAQ from "./components/FAQ/FAQ";
 import Footer from "./components/Footer/Footer";
 
 const App = () => {
-  return <main className="overflow-x-hidden">
-      
+  return <main className="overflow-x-hidden">    
       <Hero />
       <Products />
       <Banner />
